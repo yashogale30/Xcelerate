@@ -1,12 +1,14 @@
 import cv2 as cv
 import numpy as np
 
+#get canny edges in the image by canny edge detection method 
 def canny(image):
     gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
     blur = cv.GaussianBlur(gray, (5, 5), 0)
     canny = cv.Canny(blur, 50, 150)
     return canny
 
+#get region of interest in the image i.e. only the lane we want to follow by getting the cordinates using image display in matplotlib
 def ROI(image):
     h = image.shape[0]
     triangle = np.array([(200, h), (1100, h), (550, 250)])
@@ -15,12 +17,14 @@ def ROI(image):
     roi = cv.bitwise_and(image, poly)
     return roi
 
+#produce lines for the canny edges in the region of interest
 def produce_lines(image):
     c = canny(image)
     r = ROI(c)
     lines = cv.HoughLinesP(r, 2, np.pi/180, 100, np.array([]), 40, 5)
     return lines
 
+#produce coordinates from the values of m and b given
 def make_coordinates(image, parameters):
     slope, intercept = parameters
     y1 = image.shape[0]
@@ -29,6 +33,7 @@ def make_coordinates(image, parameters):
     x2 = int((y2 - intercept) / slope)
     return (x1, y1), (x2, y2)
 
+#get avg values of m and b for the left and right set of lines the produce cordinates for the m and b values and draw the lines on the mask image
 def avg_slope_intercept_lines(image, lines):
     left = []
     right = []
@@ -55,6 +60,7 @@ def avg_slope_intercept_lines(image, lines):
     
     return image
 
+# main function to display our lane lines on the main image
 def display_lane_lines(image):
     lines = produce_lines(image)
     mask = np.zeros_like(image)
@@ -63,12 +69,12 @@ def display_lane_lines(image):
 
 
 #road image
-# img = cv.imread('road.jpg')
-# lane = np.copy(img)
-# l = display_lane_lines(img)
-# cv.imshow('lane', l)
-# cv.waitKey(0)
-# cv.destroyAllWindows()
+ img = cv.imread('road.jpg')
+ lane = np.copy(img)
+ l = display_lane_lines(img)
+ cv.imshow('lane', l)
+ cv.waitKey(0)
+ cv.destroyAllWindows()
 
 
 #road video
