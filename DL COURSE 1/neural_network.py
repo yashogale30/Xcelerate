@@ -130,12 +130,11 @@ def nn_train(X,Y,layers_dimensions,num_iterations = 1000, learning_rate = 0.01, 
                 print(f"cost after {i+1}th iteration is : {cost}")
         grads = backwards_prop(AL,Y,caches)
         params = update_parameters(params,grads,learning_rate)
+        return params,grads
         
 def nn_predict(X_test):
     Y_predicted,caches = forward_prop(X_test,params)
-    print(Y_predicted)
-    print(caches['W'])
-    print(caches['b'])
+    return Y_predicted
     
         
     
