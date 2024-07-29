@@ -76,12 +76,12 @@ def linear_activation_backwards(dA, cache, activation):
         dZ = dA * s * (1 - s)
         dA_prev, dW, db = linear_backwards(dZ, linear_cache)
     if(activation == "relu"):
-        dZ = np.array(dA, copy=True)
-        dZ[activation_cache <= 0] = 0
+        Z = activation_cache
+        dZ = dA * np.where(Z < 0, 0, 1)
         dA_prev, dW, db = linear_backwards(dZ, linear_cache)
     if(activation == "leaky_relu"):
-        dZ = np.array(dA, copy=True)
-        dZ[activation_cache < 0] *= 0.01
+        Z = activation_cache
+        dZ = dA * np.where(Z < 0, 0.01, 1)
         dA_prev, dW, db = linear_backwards(dZ, linear_cache)
     if(activation == "tanh"):
         dZ = dA * (1 - np.power(np.tanh(activation_cache), 2))
