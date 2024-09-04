@@ -1,0 +1,59 @@
+https://leetcode.com/problems/walking-robot-simulation/submissions/
+
+
+class Solution {
+public:
+    
+    /*
+        pehle sare obstacles ke pos ko string banake set me daldo
+        og pos ko 0,0 set kardo, directions vector me store 4 diff directions
+        initial direction ko north yani directions[0] rakho, here dir is iterator in directions
+        dist stores the distance
+        commands me iterate karo
+        condition ke hisab se rotate karo agar -1 ya -2 hai toh
+        agar positive integer hai toh cirrent direction ke hisba se corresponding cordinate me usko add kardo and check woh point obstacle me hai ya nai, agar nai hai toh uske dist ko max banado, n agar hai toh break loop at that position
+    */
+    int robotSim(vector<int>& commands, vector<vector<int>>& obstacles) 
+    {
+        unordered_set<string> m;
+        for(const auto& c : obstacles)
+        {
+            m.insert(to_string(c[0])+","+to_string(c[1]));
+        }
+        vector<vector<int>> directions{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        int x = 0;
+        int y = 0;
+        int dir = 0;
+        int dist = 0;
+        for(int i = 0; i<commands.size();i++)
+        {
+            if(commands[i] == -1)
+            {
+                dir = (dir+1)%4;
+            }
+            else if(commands[i] == -2)
+            {
+                dir = (dir+3)%4;
+            }
+            else
+            {
+                for(int j = 0; j<commands[i]; j++)
+                {
+                    int move_x = x + directions[dir][0];
+                    int move_y = y + directions[dir][1];
+                    string s = to_string(move_x)+","+to_string(move_y);
+                    if(m.find(s) == m.end())
+                    {
+                        x = move_x;
+                        y = move_y;
+                        dist = max(dist, (x*x)+(y*y));
+                    }
+                    else
+                        break;
+                    
+                }
+            }
+        }
+        return dist;
+    }
+};
