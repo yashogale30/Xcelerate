@@ -1,0 +1,48 @@
+https://leetcode.com/problems/find-missing-observations/
+
+/*
+    pehle find the remaining sum ka value by multiplying mean with total elements(m+n) and subtracting sum of elements of rolls
+    base will store equal parts division of sum/n
+    k will store part left aftersum/n ie. remainder
+    agar sum is multiplke of n and 6 se chhota ya same hai toh sol ke saare elements ko sum/n kardo
+    agar koi remainder hai toh sabko same values dene ke bad remainder ko wek ek karke elements me add karte jao
+*/
+
+
+
+class Solution {
+public:
+    vector<int> missingRolls(vector<int>& rolls, int mean, int n) 
+    {
+        vector<int>sol{};
+        int sum = (mean*(rolls.size()+n)) - accumulate(rolls.begin(),rolls.end(),0);
+        int k = sum%n;
+        int base = sum/n;
+        if(sum>0 && sum>=n && sum<=6*n)
+        {
+            if(k == 0 && base <=6 && base>=1)
+            {
+                for(int i = 0;i<n;i++)
+                {
+                    sol.push_back(sum/n);
+                }
+            }
+            else if(k!=0 && base<=6 && base>=1)
+            {
+                for (int i = 0; i < n; ++i) 
+                {
+                    if (i < k) 
+                    {
+                        sol.push_back(base + 1);
+                    } 
+                    else 
+                    {
+                        sol.push_back(base);
+                    }
+                }
+
+            }
+        }
+        return sol;
+    }
+};
