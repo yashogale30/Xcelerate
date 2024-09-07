@@ -1,0 +1,60 @@
+https://leetcode.com/problems/linked-list-in-binary-tree/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+
+/*
+    pehle traverse karne ke liye ek function banao
+    traverse me agar head null hai matlab pura linked list traverse kar lia matlab ki pura linked list tree me prssent hai as a path     to true return
+    agar root null hai matlab tree iske aage exist nhi karta and linked lits pura traverse nai hua toh return false
+    agar root and head ka current value same nhi hai matlan linked list as a single path prsent nhi hai toh bhi return false
+    agar yeh teeno conditions me se kuch nai hua matlab hai ki hum sahi path par ja rhe hai jaha linked list ke elements hume FILHAL     ek path me mil rhe hai (jaha tak linked list traverse kia h vaha tak) toh fir yehi traverse ko recursively call karo 2 bar (ek       bar on root->left and head->next to check in left subtree and ek bar on root->right and head->next to check in right subtree) and woh dono ka OR return karo kyuki koi ekmside bhi agar path mil gya toh bhi chalega
+    
+    
+    ab main function me pehle check karo agar head null hai matlab LL exist nai karta toh woh tree me kyu hi hoga toh return false sidha
+    agar LL exsit karta hai toh hume 3 funcs ko call karna hai
+    1. traverse ko call karo on current head and current root
+    2. main function ko recursively call karo on head and root->left kyuki agar root ka value LL ke element se nai milta toh hum uske subtree ko check karenge
+    3. similarly main function ko recursively call karo on root->right and head for the same reason ki agar left subtree me nai hua toh right me ho sakta hai
+    
+    Then yeh teeno funcs ka OR return karo kyuki ya toh hume current head and root pe LL milna chalu hoga toh hum traverse karenge, ya fir right subtree me dekhenge ya fir left me and then usme agar mila toh usme traverse karenge
+*/
+class Solution {
+public:
+    bool traverse(ListNode* head, TreeNode* root)
+    {
+        if(head == NULL)
+            return true;
+        else if(root == NULL)
+            return false;
+        else if(head->val != root->val)
+            return false;
+        return traverse(head->next,root->left) || traverse(head->next,root->right);
+    }
+        
+    bool isSubPath(ListNode* head, TreeNode* root) 
+    {
+        if(root == NULL)
+            return false;
+        return traverse(head,root) || isSubPath(head, root->left) || isSubPath(head, root->right);
+    }
+};
