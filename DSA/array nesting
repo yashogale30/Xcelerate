@@ -1,0 +1,27 @@
+https://leetcode.com/problems/array-nesting/
+
+
+class Solution {
+public:
+    int arrayNesting(vector<int>& nums) 
+    {
+        unordered_set<int>s{};
+        int maxlength = 0;
+        for(int i = 0; i<nums.size();i++)
+        {
+            if(s.find(i) == s.end())
+            {
+                int curr = i;
+                int c = 0;
+                while(s.find(curr) == s.end())
+                {
+                    s.insert(curr);
+                    curr = nums[curr];
+                    c++;
+                }
+                maxlength = max(maxlength,c);
+            }
+        }
+        return maxlength;
+    }
+};
