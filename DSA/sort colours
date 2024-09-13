@@ -1,0 +1,47 @@
+https://leetcode.com/problems/sort-colors/
+
+/* use quick sort for time of nlogn and space complexity of O(1)*/
+
+class Solution {
+public:
+    int partition_index(vector<int> &arr, int low,int high)
+{
+    int pivot = arr[low];
+    int i = low;int j = high;
+    while(i<j)
+    {
+        while(arr[i]<=arr[low] && i<=high-1)
+        {
+            i++;
+        }
+        while(arr[j]>arr[low] && j>=low+1)
+        {
+            j--;
+        }
+        if(i<j)
+        {
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
+    int temp = arr[j];
+    arr[j] = arr[low];
+    arr[low] = temp;
+    return j;
+}
+
+void qs(vector<int> &arr, int low, int high)
+{
+    if(low<high)
+    {
+        int part_index = partition_index(arr,low,high);
+        qs(arr,low,part_index-1);
+        qs(arr,part_index+1,high);
+    }
+}
+    void sortColors(vector<int>& nums) 
+    {
+        qs(nums,0,nums.size()-1);
+    }
+};
