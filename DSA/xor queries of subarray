@@ -1,0 +1,23 @@
+https://leetcode.com/problems/xor-queries-of-a-subarray/
+
+/* use prefixXor */
+
+class Solution {
+public:
+    
+    vector<int> xorQueries(vector<int>& arr, vector<vector<int>>& queries) 
+    {
+        int n = arr.size();
+        vector<int> prefixXOR(n + 1, 0);
+        vector<int>sol{};
+        for (int i = 0; i < n; ++i) 
+        {
+            prefixXOR[i + 1] = prefixXOR[i] ^ arr[i];
+        }
+        for(auto c : queries)
+        {
+            sol.push_back(prefixXOR[c[1]+1]^prefixXOR[c[0]]);
+        }
+        return sol;
+    }
+};
