@@ -1,0 +1,23 @@
+https://leetcode.com/problems/minimum-bit-flips-to-convert-number/
+
+
+/*
+  take xor of start and goal and count number of 1s in it, as when ther are diff bit values, xor gives 1
+*/
+
+
+class Solution {
+public:
+    int minBitFlips(int start, int goal) 
+    {
+        int b = start^goal;
+        bitset<32>bin(b);
+        int c = 0;
+        for(int i = 0; i<bin.size();i++)
+        {
+            if(bin[i])
+                c++;
+        }
+        return c;
+    }
+};
