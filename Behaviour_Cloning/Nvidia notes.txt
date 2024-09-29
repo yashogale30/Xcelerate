@@ -1,0 +1,8 @@
+Nvidia Model
+
+- A model used for self-driving cars
+- Use YUV color scheme
+- It requires preprocessing of images like: GaussianBlur,    ScaleDown and Resizing of the input images
+- It has a CNN architecture 
+- Read the Research Paper
+
