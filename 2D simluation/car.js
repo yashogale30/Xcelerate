@@ -6,25 +6,23 @@ class Car{
         this.height=height;
 
 
-        //Physics stuff
-        //just copy paste :)
-
+        
         this.speed=0;
         this.acceleration=0.2;
         this.maxSpeed=3;
         this.friction=0.05;
         this.angle=0;
 
+        this.sensor=new Sensor(this);
         this.controls=new Controls();
     }
 
-    update(){
+    update(roadBorders){
         this.#move();
+        this.sensor.update(roadBorders);
     }
 
     #move(){
-        //updates the speed
-
         if(this.controls.forward){
             this.speed+=this.acceleration;
         }
@@ -67,10 +65,6 @@ class Car{
         ctx.save();
         ctx.translate(this.x,this.y);
         ctx.rotate(-this.angle);
-   
-        //inbuild fucntions of ctx
-
-
 
         ctx.beginPath();
         ctx.rect(
@@ -82,5 +76,7 @@ class Car{
         ctx.fill();
 
         ctx.restore();
+
+        this.sensor.draw(ctx);
     }
 }
