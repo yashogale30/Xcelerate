@@ -1,5 +1,6 @@
 class Road{
     constructor(x,width,laneCount=3){
+        //funtion for road
         this.x=x;
         this.width=width;
         this.laneCount=laneCount;
@@ -11,16 +12,19 @@ class Road{
         this.top=-infinity;
         this.bottom=infinity;
 
+
+        //define the four corners of road boundries
         const topLeft={x:this.left,y:this.top};
         const topRight={x:this.right,y:this.top};
         const bottomLeft={x:this.left,y:this.bottom};
         const bottomRight={x:this.right,y:this.bottom};
         this.borders=[
-            [topLeft,bottomLeft],
+            [topLeft,bottomLeft],//for storing purpose 
             [topRight,bottomRight]
         ];
     }
 
+    //to get the center of lane
     getLaneCenter(laneIndex){
         const laneWidth=this.width/this.laneCount;
         return this.left+laneWidth/2+
@@ -31,6 +35,8 @@ class Road{
         ctx.lineWidth=5;
         ctx.strokeStyle="white";
 
+
+        //for dashed lanes
         for(let i=1;i<=this.laneCount-1;i++){
             const x=lerp(
                 this.left,

@@ -2,9 +2,20 @@
 <head>
     <title>Self-driving car - No libraries</title>
     <link rel="stylesheet" href="style.css">
+    <!-- links the stylesheet  -->
 </head>
 <body>
-    <canvas id="myCanvas"></canvas>
+    <canvas id="carCanvas"></canvas>
+    <!-- canvas is a tool sort of used to draw things in html 
+     
+    these buttons used to store the best car-->
+    <div id="verticalButtons">
+        <button onclick="save()">💾</button>
+        <button onclick="discard()">🗑️</button>
+    </div>
+    <canvas id="networkCanvas"></canvas>
+    <script src="visualizer.js"></script>
+    <script src="network.js"></script>
     <script src="sensor.js"></script>
     <script src="utils.js"></script>
     <script src="road.js"></script>

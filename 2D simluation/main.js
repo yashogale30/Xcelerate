@@ -1,23 +1,99 @@
-const canvas=document.getElementById("myCanvas");
-canvas.width=200;
+const carCanvas=document.getElementById("carCanvas");
+//this is the canavs for the cars
+carCanvas.width=200;
+const networkCanvas=document.getElementById("networkCanvas");
+//this for the neural netwrok
+networkCanvas.width=300;
 
-const ctx = canvas.getContext("2d");
-const road=new Road(canvas.width/2,canvas.width*0.9);
-const car=new Car(road.getLaneCenter(1),100,30,50);
 
-animate();
+//ctx is a common tool used in drawing 2d objects or things
+//here not exactly ctx , but the get context 2d helps in drawing 2d things
+const carCtx = carCanvas.getContext("2d");
+const networkCtx = networkCanvas.getContext("2d");
 
-function animate(){
-    car.update(road.borders);
+//creates a road object
+const road=new Road(carCanvas.width/2,carCanvas.width*0.9);
 
-    canvas.height=window.innerHeight;
 
-    ctx.save();
-    ctx.translate(0,-car.y+canvas.height*0.7);
+//number of mutation for the car
+const N=100;
+const cars=generateCars(N);//calling the function to genertae cars
+let bestCar=cars[0];//initially set the best car to zeroth car
 
-    road.draw(ctx);
-    car.draw(ctx);
+//load the best car that we stored on local disk
+if(localStorage.getItem("bestBrain")){
+    for(let i=0;i<cars.length;i++){
+        cars[i].brain=JSON.parse(//assing the brain of best car to all cars
+            localStorage.getItem("bestBrain"));
+        if(i!=0){
+            NeuralNetwork.mutate(cars[i].brain,0.1);
+        }
+    }
+}
 
-    ctx.restore();
-    requestAnimationFrame(animate);
+const traffic=[//to create dummy cars for traffic
+    new Car(road.getLaneCenter(1),-100,30,50,"DUMMY",2,getRandomColor()),
+    new Car(road.getLaneCenter(0),-300,30,50,"DUMMY",2,getRandomColor()),
+    new Car(road.getLaneCenter(2),-300,30,50,"DUMMY",2,getRandomColor()),
+    new Car(road.getLaneCenter(0),-500,30,50,"DUMMY",2,getRandomColor()),
+    new Car(road.getLaneCenter(1),-500,30,50,"DUMMY",2,getRandomColor()),
+    new Car(road.getLaneCenter(1),-700,30,50,"DUMMY",2,getRandomColor()),
+    new Car(road.getLaneCenter(2),-700,30,50,"DUMMY",2,getRandomColor()),
+];
+
+animate();//animate is used to generate pics frequently to create an animation effect
+
+//fucntion to save best brain of the best car
+function save(){
+    localStorage.setItem("bestBrain",
+        JSON.stringify(bestCar.brain));
+}
+
+function discard(){
+    localStorage.removeItem("bestBrain");
+}
+
+//fucntion to generate car , an array
+function generateCars(N){
+    const cars=[];
+    for(let i=1;i<=N;i++){
+        cars.push(new Car(road.getLaneCenter(1),100,30,50,"AI"));
+    }
+    return cars;
+}
+
+function animate(time){
+    for(let i=0;i<traffic.length;i++){//updates the postion and stauts of all cars summy ones
+        traffic[i].update(road.borders,[]);
+    }
+    for(let i=0;i<cars.length;i++){//our car's
+        cars[i].update(road.borders,traffic);
+    }
+    bestCar=cars.find(//finding the best car , here we used the car having minimum y coordinate
+        c=>c.y==Math.min(
+            ...cars.map(c=>c.y)
+        ));
+
+    carCanvas.height=window.innerHeight;
+    networkCanvas.height=window.innerHeight;
+
+    carCtx.save();
+    carCtx.translate(0,-bestCar.y+carCanvas.height*0.7);
+
+    road.draw(carCtx);
+    for(let i=0;i<traffic.length;i++){
+        traffic[i].draw(carCtx);
+    }
+    carCtx.globalAlpha=0.2;//this is an effect used 
+    for(let i=0;i<cars.length;i++){
+        cars[i].draw(carCtx);
+    }
+    carCtx.globalAlpha=1;
+    bestCar.draw(carCtx,true);
+
+    carCtx.restore();
+
+    networkCtx.lineDashOffset=-time/50;
+    Visualizer.drawNetwork(networkCtx,bestCar.brain);
+    requestAnimationFrame(animate);//call for animation
 }
