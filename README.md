@@ -44,7 +44,7 @@ The trained model is deployed via a Flask API. In autonomous mode, the simulator
 
 ### Behavioral Cloning architecture ###
 
-<img src = "bcloning.png" width =  "700" height = "300" >
+<img src = "img/bcloning.png" width =  "700" height = "300" >
 <br><br>
 
 
@@ -88,7 +88,7 @@ End-to-end learning in self-driving cars refers to a machine learning approach w
 
     - `Demo-Output`
 
-        <img src = "SolidYellowCurve.jpg" width =  "500" height = "300" >
+        <img src = "img/SolidYellowCurve.jpg" width =  "500" height = "300" >
 
 
 - ## Traffic Sign Detection ##
