@@ -48,10 +48,6 @@ The trained model is deployed via a Flask API. In autonomous mode, the simulator
 <br><br>
 
 
-[![Watch Video](video-thumbnail.jpg)](https://github.com/yashogale30/Xcelerate/Viraj/Behavioral Cloning/track2-autonomous-driving.mp4)
-
-
-
 
 
 # End to End Learning #
