@@ -48,10 +48,8 @@ The trained model is deployed via a Flask API. In autonomous mode, the simulator
 <br><br>
 
 
-<video width="640" height="360" controls>
-  <source src="Behavioral Cloning/track2-autonomous-driving.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+[![Watch Video](video-thumbnail.jpg)](https://github.com/yashogale30/Xcelerate/Viraj/Behavioral Cloning/track2-autonomous-driving.mp4)
+
 
 
 
@@ -88,7 +86,8 @@ End-to-end learning in self-driving cars refers to a machine learning approach w
 
 - `Demo-Output`
 
-  <img src = "img\SolidYellowCurve.jpg" width =  "500" height = "300" >
+  <img src = "img/SolidYellowCurve.jpg" width =  "500" height = "300" >
+  <br><br>
 
 
 - ## Traffic Sign Detection ##
