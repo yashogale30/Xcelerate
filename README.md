@@ -88,7 +88,7 @@ End-to-end learning in self-driving cars refers to a machine learning approach w
 
 - `Demo-Output`
 
-  <img src = "img/SolidYellowCurve.jpg" width =  "500" height = "300" >
+  <img src = "img\SolidYellowCurve.jpg" width =  "500" height = "300" >
 
 
 - ## Traffic Sign Detection ##
