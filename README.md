@@ -50,6 +50,10 @@ The trained model is deployed via a Flask API. In autonomous mode, the simulator
 
 
 
+https://github.com/user-attachments/assets/9bae5bfc-d7d4-4012-955e-f7b63d766e79
+
+
+
 # End to End Learning #
 End-to-end learning in self-driving cars refers to a machine learning approach where a single neural network directly maps raw input data, such as images from a camera, to driving actions like steering, acceleration, and braking. This method simplifies the traditional pipeline by eliminating the need for separate components like perception, planning, and control, allowing the model to learn driving behaviors from large datasets of driving scenarios. 
 
