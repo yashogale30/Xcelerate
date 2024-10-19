@@ -44,9 +44,8 @@ The trained model is deployed via a Flask API. In autonomous mode, the simulator
 
 ### Behavioral Cloning architecture ###
 
-<img src = "viraj/img/bcloning.png" width =  "700" height = "300" >
-<br><br>
 
+![bcloning](https://github.com/user-attachments/assets/b31ae850-35bf-44ef-a3d9-782516fbd02a)
 
 
 
@@ -83,6 +82,11 @@ End-to-end learning in self-driving cars refers to a machine learning approach w
     - `Line.py` : The Line class represents a line segment defined by two endpoints, calculating its slope and y-intercept (bias). It includes methods for coordinate management and drawing the line on images using OpenCV.
     - `lane_detection.py` : This lane detection pipeline processes video frames or images to detect and overlay lane lines using edge detection, Hough transform, and ROI masking. It supports real-time lane smoothing and solid line inference for consistent detection.
     - `main.py` : Implement all the functionalities  of the lane detection module, including data loading, processing, and visualization. It integrates the Lane class with Line class and detects lanes in road images and videos.
+ 
+    
+![solidYellowCurve](https://github.com/user-attachments/assets/967545a7-f03d-4c18-b6cc-3b2496aaa46e)
+
+
 
 - ## Traffic Sign Detection ##
     ### Overview ###
