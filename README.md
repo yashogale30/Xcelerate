@@ -84,12 +84,6 @@ End-to-end learning in self-driving cars refers to a machine learning approach w
     - `lane_detection.py` : This lane detection pipeline processes video frames or images to detect and overlay lane lines using edge detection, Hough transform, and ROI masking. It supports real-time lane smoothing and solid line inference for consistent detection.
     - `main.py` : Implement all the functionalities  of the lane detection module, including data loading, processing, and visualization. It integrates the Lane class with Line class and detects lanes in road images and videos.
 
-- `Demo-Output`
-
-  <img src = "img/SolidYellowCurve.jpg" width =  "500" height = "300" >
-  <br><br>
-
-
 - ## Traffic Sign Detection ##
     ### Overview ###
     Build a Deep Learning Model using Convolutional Neural Networks (CNN) to classify traffic signs from images. The model will be trained on German Traffic Sign Recognition Benchmark (GTSRB) dataset.  
