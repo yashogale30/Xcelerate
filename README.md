@@ -205,16 +205,15 @@ Phase 2 : Creating a virtual world and deploying our model on it
 - The live stream variant showcases real-time updates as the car navigates through its environment.
 
 
+https://github.com/user-attachments/assets/9dc53013-021f-4eab-9324-f739818dd3b7
+
+
 
 ## Virtual World Generator for car to run ##
-Here’s an updated README with the new sections based on Phase 2 of the project:
-
----
 
 # Self-Driving Car Simulation
 
 ## Overview
-
 This project is a full-featured self-driving car simulation built in JavaScript, evolving across multiple phases. Phase 2 introduces more advanced features like spatial graphs, dynamic viewport rendering, environment building, and integration with OpenStreetMap. This phase enhances the car’s interaction with a more realistic world, including roads, buildings, and trees, while offering tools for creating and managing the environment.
 
 ## Key Components
@@ -288,10 +287,6 @@ This project is a full-featured self-driving car simulation built in JavaScript,
 - The MiniMap shows the current position of the car, the road network, and any nearby obstacles or landmarks.
 - Useful for tracking the car’s movement and ensuring it stays on course.
 
-<video width="640" height="360" controls>
-  <source src="car-output.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
 
 
 
